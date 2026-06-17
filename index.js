@@ -32,7 +32,16 @@ async function run() {
     
     const database = client.db("hire_loop");
     const jobCollection = database.collection("jobs");
+    const companyCollection = database.collection("companies");
 
+    // Company Related APIs
+    app.post('/api/companies', async(req, res)=> {
+        const company = req.body;
+        const result = await companyCollection.insertOne(company);
+        res.send(result);
+    })
+
+    // Recruiter Job Related APIs
     app.get('/api/jobs', async(req, res)=> {
         const query = {};
         if(req,query.companyId){
