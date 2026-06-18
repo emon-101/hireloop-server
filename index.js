@@ -41,10 +41,19 @@ async function run() {
         res.send(result);
     })
 
+    app.get('/api/my/companies', async(req, res) => {
+      const query = {};
+      if(req.query.recruiterId) {
+        query.recruiterId = req.query.recruiterId;
+      }
+      const result = await companyCollection.findOne(query);
+      res.send(result);
+    })
+
     // Recruiter Job Related APIs
     app.get('/api/jobs', async(req, res)=> {
         const query = {};
-        if(req,query.companyId){
+        if(req.query.companyId){
             query.companyId = req.query.companyId;
         }
         if(req.query.status) {
