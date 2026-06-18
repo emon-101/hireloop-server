@@ -76,7 +76,7 @@ async function run() {
         if(req.query.status) {
             query.status = req.query.status;
         }
-        const cursor = jobCollection.find(query);
+        const cursor = jobCollection.find(query).skip(12);
         const result = await cursor.toArray();
         res.send(result);
     })
